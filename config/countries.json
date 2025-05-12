@@ -1,0 +1,58 @@
+{
+  "countries": [
+    {
+      "code": "AR",
+      "name": "Argentina",
+      "culture": "es-AR",
+      "language": "Español"
+    },
+    {
+      "code": "PE",
+      "name": "Perú",
+      "culture": "es-PE",
+      "language": "Español"
+    },
+    {
+      "code": "CO",
+      "name": "Colombia",
+      "culture": "es-CO",
+      "language": "Español"
+    },
+    {
+      "code": "CL",
+      "name": "Chile",
+      "culture": "es-CL",
+      "language": "Español"
+    },
+    {
+      "code": "UY",
+      "name": "Uruguay",
+      "culture": "es-UY",
+      "language": "Español"
+    },
+    {
+      "code": "PY",
+      "name": "Paraguay",
+      "culture": "es-PY",
+      "language": "Español"
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador",
+      "culture": "es-EC",
+      "language": "Español"
+    },
+    {
+      "code": "US",
+      "name": "Estados Unidos",
+      "culture": "en-US",
+      "language": "English"
+    },
+    {
+      "code": "BR",
+      "name": "Brasil",
+      "culture": "pt-BR",
+      "language": "Português"
+    }
+  ]
+} 

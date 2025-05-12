@@ -1,0 +1,50 @@
+{
+    "commercial_events": [
+        {
+            "boldText": "SMART Sale",
+            "plainText": "¡Aprovechá antes que se acabe!",
+            "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+            "smartDaysGlow": "on",
+            "start_date": "2025-05-11T00:00",
+            "end_date": "2025-05-14T23:59:59",
+            "showCTA": "off",
+            "ctaText": "Ver ofertas",
+            "ctaLink": "https://jetsmart.com/ofertas/es-ar/smart-sale"
+        }
+    ],
+    "flash_promos": [
+        {
+            "boldText": "Promo Flash",
+            "plainText": "Hasta 50% OFF en rutas hacia Brasil",
+            "icon": "<i class=\"fa-solid fa-bolt\"></i>",
+            "smartDaysGlow": "on",
+            "start_date": "2025-05-12T18:00",
+            "end_date": "2025-05-13T10:00",
+            "showCTA": "on",
+            "ctaText": "Aplicar promo",
+            "ctaLink": "?pc=BRASIL"
+        },
+        {
+            "boldText": "Promo Flash",
+            "plainText": "Hasta 75% OFF en rutas hacia Córdoba, Mendoza y Resistencia",
+            "icon": "<i class=\"fa-solid fa-bolt\"></i>",
+            "smartDaysGlow": "on",
+            "start_date": "2025-05-13T11:00",
+            "end_date": "2025-05-13T19:00",
+            "showCTA": "on",
+            "ctaText": "Aplicar promo",
+            "ctaLink": "?pc=WOW"
+        },
+        {
+            "boldText": "Promo Flash",
+            "plainText": "Hasta 50% OFF en rutas hacia Chile",
+            "icon": "<i class=\"fa-solid fa-bolt\"></i>",
+            "smartDaysGlow": "on",
+            "start_date": "2025-05-14T18:00",
+            "end_date": "2025-05-15T10:00",
+            "showCTA": "on",
+            "ctaText": "Aplicar promo",
+            "ctaLink": "?pc=CHILE"
+        }
+    ]
+}

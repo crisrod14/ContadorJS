@@ -1,0 +1,16 @@
+{
+    "commercial_events": [
+        {
+            "boldText": "SMART Days",
+            "plainText": "¡Aprovecha antes que se acabe!",
+            "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+            "smartDaysGlow": "on",
+            "start_date": "2025-05-12T10:00",
+            "end_date": "2025-05-19T10:00",
+            "showCTA": "off",
+            "ctaText": "",
+            "ctaLink": ""
+        }
+    ],
+    "flash_promos": []
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JetSmart Countdown CMS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>JetSmart Countdown CMS</h1>
+    </header>
+
+    <nav class="nav">
+        <ul class="nav-list">
+            <% Object.keys(COUNTRIES).forEach(function(country) { %>
+                <li class="nav-item">
+                    <a href="/country/<%= country %>" class="nav-link <%= currentCountry === country ? 'active' : '' %>">
+                        <%= COUNTRIES[country].name %>
+                    </a>
+                </li>
+            <% }); %>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <% if (messages.success) { %>
+            <div class="alert alert-success">
+                <%= messages.success %>
+            </div>
+        <% } %>
+
+        <% if (messages.error) { %>
+            <div class="alert alert-error">
+                <%= messages.error %>
+            </div>
+        <% } %>
+
+        <div class="preview">
+            <h2 class="preview-title">Selecciona un país para configurar los eventos</h2>
+            <p>Utiliza el menú de navegación superior para seleccionar el país y configurar los eventos comerciales y promociones flash.</p>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,66 @@
+{
+  "commercial_events": [
+    {
+      "type": "evento-comercial",
+      "start_date": "2024-05-12T00:00:00",
+      "end_date": "2024-05-19T23:59:59",
+      "boldText": "Cyber",
+      "icon": "👑",
+      "plainText": "¡Hasta 50% OFF!",
+      "ctaText": "Ver ofertas",
+      "ctaLink": "/ofertas",
+      "showCTA": true,
+      "smartDaysGlow": true,
+      "routes": ["*"],
+      "promocode": "CYBER",
+      "discount": 50
+    }
+  ],
+  "flash_promos": [
+    {
+      "type": "promo-flash",
+      "start_date": "2024-05-12T18:00:00",
+      "end_date": "2024-05-13T10:00:00",
+      "boldText": "Promo Flash Brasil",
+      "icon": "⚡",
+      "plainText": "¡50% OFF!",
+      "ctaText": "Comprar ahora",
+      "ctaLink": "/ofertas/brasil",
+      "showCTA": true,
+      "smartDaysGlow": true,
+      "routes": ["BUEGIG", "BUEFLN", "MDZGIG"],
+      "promocode": "BRASIL",
+      "discount": 50
+    },
+    {
+      "type": "promo-flash",
+      "start_date": "2024-05-13T11:00:00",
+      "end_date": "2024-05-13T19:00:00",
+      "boldText": "Promo Flash WOW",
+      "icon": "⚡",
+      "plainText": "¡75% OFF!",
+      "ctaText": "Comprar ahora",
+      "ctaLink": "/ofertas/wow",
+      "showCTA": true,
+      "smartDaysGlow": true,
+      "routes": ["BUECOR", "BUEMDZ", "BUEREL"],
+      "promocode": "WOW",
+      "discount": 75
+    },
+    {
+      "type": "promo-flash",
+      "start_date": "2024-05-14T18:00:00",
+      "end_date": "2024-05-15T10:00:00",
+      "boldText": "Promo Flash Chile",
+      "icon": "⚡",
+      "plainText": "¡50% OFF!",
+      "ctaText": "Comprar ahora",
+      "ctaLink": "/ofertas/chile",
+      "showCTA": true,
+      "smartDaysGlow": true,
+      "routes": ["BUESCL", "MDZSCL"],
+      "promocode": "CHILE",
+      "discount": 50
+    }
+  ]
+} 

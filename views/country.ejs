@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS JetSmart - <%= COUNTRIES[country].name %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007AFF;
+            --danger-color: #FF3B30;
+            --warning-color: #FFCC00;
+            --success-color: #34C759;
+            --background-color: #FFFFFF;
+            --surface-color: #F2F2F7;
+            --text-color: #1C1C1E;
+            --secondary-text-color: #8E8E93;
+            --border-color: #D1D1D6;
+            --hover-color: #E5E5EA;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container-fluid {
+            padding: 0;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background-color: var(--surface-color);
+            padding: 20px;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .country-link {
+            display: block;
+            padding: 12px 16px;
+            margin: 8px 0;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 17px;
+            transition: background-color 0.2s;
+        }
+
+        .country-link:hover {
+            background-color: var(--hover-color);
+        }
+
+        .country-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .main-content {
+            padding: 24px;
+        }
+
+        .promo-box {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(60,60,67,0.08);
+            overflow: hidden;
+        }
+
+        .promo-header {
+            padding: 16px;
+            background-color: var(--surface-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .promo-header h5 {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .promo-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .promo-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: var(--secondary-text-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 17px;
+            transition: border-color 0.2s;
+            background-color: #fff;
+            color: var(--text-color);
+            box-shadow: 0 1px 2px rgba(60,60,67,0.03);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            background-color: #fff;
+        }
+
+        .form-control::placeholder {
+            color: #B0B0B8;
+            opacity: 1;
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238E8E93' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 32px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -10px;
+            margin-left: -10px;
+        }
+
+        .form-col {
+            flex: 0 0 33.333%;
+            max-width: 33.333%;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+
+        .form-col-full {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+
+        .promo-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            min-height: 44px;
+            padding: 0 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+
+        .delete-btn {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .clear-btn {
+            background-color: var(--warning-color);
+            color: #1C1C1E;
+        }
+
+        .add-btn {
+            background-color: var(--success-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .add-btn:hover {
+            opacity: 0.9;
+        }
+
+        .save-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .save-btn:hover {
+            opacity: 0.9;
+        }
+
+        .alert {
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+
+        .alert-danger {
+            background-color: rgba(255, 59, 48, 0.1);
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+        }
+
+        .alert-success {
+            background-color: rgba(52, 199, 89, 0.1);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        .promo-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--surface-color);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .promo-tabs::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .promo-tabs::-webkit-scrollbar-track {
+            background: var(--surface-color);
+            border-radius: 3px;
+        }
+
+        .promo-tabs::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .promo-tab {
+            padding: 16px 24px;
+            border-radius: 10px;
+            background-color: var(--surface-color);
+            color: var(--text-color);
+            cursor: pointer;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border-color);
+            min-width: 280px;
+            min-height: 44px;
+        }
+
+        .promo-tab:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-1px);
+            border-color: var(--primary-color);
+        }
+
+        .promo-tab.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .promo-tab.active .dates {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .promo-tab.active .date-badge {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .promo-tab .emoji {
+            font-size: 24px;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .promo-tab .info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .promo-tab .title {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.3;
+        }
+
+        .promo-tab .dates {
+            display: flex;
+            gap: 12px;
+            font-size: 15px;
+            color: var(--secondary-text-color);
+        }
+
+        .promo-tab .date-badge {
+            background-color: rgba(60,60,67,0.07);
+            padding: 4px 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+        }
+
+        .promo-tab .date-badge .emoji {
+            font-size: 14px;
+        }
+
+        .promo-content {
+            display: none;
+            padding: 24px;
+            background-color: var(--surface-color);
+            border-radius: 10px;
+            margin-top: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .promo-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                min-height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .main-content {
+                padding: 16px;
+            }
+
+            .promo-content {
+                padding: 16px;
+            }
+
+            .action-btn {
+                padding: 0 16px;
+            }
+
+            .form-col {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .promo-tab {
+                min-width: 240px;
+                padding: 12px 16px;
+            }
+
+            .promo-tab .title {
+                font-size: 15px;
+            }
+
+            .promo-tab .dates {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar">
+                <h4 class="mb-4">Países</h4>
+                <% Object.entries(COUNTRIES).forEach(([code, data]) => { %>
+                    <a href="/country/<%= code %>" class="country-link <%= code === country ? 'active' : '' %>">
+                        <%= data.name %>
+                    </a>
+                <% }); %>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 main-content">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                    <h2 style="margin-bottom: 0;">Configuración - <%= COUNTRIES[country].name %></h2>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="/js/countdown-<%= country %>.js" target="_blank" class="btn btn-outline-primary" style="font-weight: 500;">
+                            Ver Script
+                        </a>
+                    </div>
+                </div>
+
+                <% if (messages.error) { %>
+                    <div class="alert alert-danger"><%= messages.error %></div>
+                <% } %>
+                <% if (messages.success) { %>
+                    <div class="alert alert-success"><%= messages.success %></div>
+                <% } %>
+
+                <form action="/country/<%= country %>/save" method="POST">
+                    <div style="display: flex; align-items: center; justify-content: flex-end; margin-bottom: 16px;">
+                        <button type="submit" class="save-btn">Guardar Cambios</button>
+                    </div>
+                    <!-- Eventos Comerciales -->
+                    <h3 class="mt-4">Eventos Comerciales</h3>
+                    <div class="promo-tabs" id="commercial-tabs">
+                        <% config.commercial_events.forEach((event, index) => { %>
+                            <div class="promo-tab" onclick="toggleTab(this, 'commercial-event-<%= index %>')">
+                                <span class="emoji">🎯</span>
+                                <div class="info">
+                                    <span class="title"><%= event.boldText %></span>
+                                    <div class="dates">
+                                        <span class="date-badge">
+                                            <span class="emoji">⏰</span>
+                                            <%= moment(event.start_date).format('DD/MM/YYYY HH:mm') %>
+                                        </span>
+                                        <span class="date-badge">
+                                            <span class="emoji">🏁</span>
+                                            <%= moment(event.end_date).format('DD/MM/YYYY HH:mm') %>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                    <button type="button" class="add-btn" onclick="addEvent('commercial')">
+                        <i class="fas fa-plus"></i> Agregar Evento Comercial
+                    </button>
+                    <div id="commercial-events">
+                        <% config.commercial_events.forEach((event, index) => { %>
+                            <div class="promo-content" id="commercial-event-<%= index %>">
+                                <div class="form-row">
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Texto en Negrita</label>
+                                            <input type="text" class="form-control" name="commercial_events[<%= index %>][boldText]" value="<%= event.boldText %>" placeholder="Ej: SMART Days" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Texto Normal</label>
+                                            <input type="text" class="form-control" name="commercial_events[<%= index %>][plainText]" value="<%= event.plainText %>" placeholder="Ej: ¡Aprovecha antes que se acabe!" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Icono</label>
+                                            <input type="text" class="form-control" name="commercial_events[<%= index %>][icon]" value="<%= event.icon %>" placeholder="Ej: <i class='fa-solid fa-lightbulb-on'></i>" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Efecto Glow</label>
+                                            <select class="form-control" name="commercial_events[<%= index %>][smartDaysGlow]">
+                                                <option value="on" <%= event.smartDaysGlow === 'on' ? 'selected' : '' %>>On</option>
+                                                <option value="off" <%= event.smartDaysGlow === 'off' ? 'selected' : '' %>>Off</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Fecha de Inicio</label>
+                                            <input type="datetime-local" class="form-control" name="commercial_events[<%= index %>][start_date]" value="<%= event.start_date ? event.start_date.toISOString ? event.start_date.toISOString().slice(0, 16) : event.start_date : '' %>" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Fecha de Fin</label>
+                                            <input type="datetime-local" class="form-control" name="commercial_events[<%= index %>][end_date]" value="<%= event.end_date ? event.end_date.toISOString ? event.end_date.toISOString().slice(0, 16) : event.end_date : '' %>" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Mostrar CTA</label>
+                                            <select class="form-control cta-toggle" name="commercial_events[<%= index %>][showCTA]" onchange="toggleCTAFields(this)">
+                                                <option value="on" <%= event.showCTA === 'on' || event.showCTA === true ? 'selected' : '' %>>On</option>
+                                                <option value="off" <%= event.showCTA === 'off' || event.showCTA === false ? 'selected' : '' %>>Off</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cta-fields" style="display: none">
+                                    <div class="form-row">
+                                        <div class="form-col">
+                                            <div class="form-group">
+                                                <label>Texto CTA</label>
+                                                <input type="text" class="form-control" name="commercial_events[<%= index %>][ctaText]" value="<%= event.ctaText %>" placeholder="Ej: Ver ofertas">
+                                            </div>
+                                        </div>
+                                        <div class="form-col">
+                                            <div class="form-group">
+                                                <label>Link CTA</label>
+                                                <input type="text" class="form-control" name="commercial_events[<%= index %>][ctaLink]" value="<%= event.ctaLink %>" placeholder="Ej: https://jetsmart.com/ofertas/es-ar/smart-sale">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="promo-actions">
+                                    <button type="button" class="action-btn delete-btn" onclick="deleteEvent('commercial', <%= index %>)">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </button>
+                                    <button type="button" class="action-btn clear-btn" onclick="clearEvent('commercial', <%= index %>)">
+                                        <i class="fas fa-eraser"></i> Limpiar
+                                    </button>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+
+                    <!-- Promociones Flash -->
+                    <h3 class="mt-4">Promociones Flash</h3>
+                    <div class="promo-tabs" id="flash-tabs">
+                        <% config.flash_promos.forEach((promo, index) => { %>
+                            <div class="promo-tab" onclick="toggleTab(this, 'flash-promo-<%= index %>')">
+                                <span class="emoji">⚡</span>
+                                <div class="info">
+                                    <span class="title"><%= promo.boldText %></span>
+                                    <div class="dates">
+                                        <span class="date-badge">
+                                            <span class="emoji">⏰</span>
+                                            <%= moment(promo.start_date).format('DD/MM/YYYY HH:mm') %>
+                                        </span>
+                                        <span class="date-badge">
+                                            <span class="emoji">🏁</span>
+                                            <%= moment(promo.end_date).format('DD/MM/YYYY HH:mm') %>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                    <button type="button" class="add-btn" onclick="addEvent('flash')">
+                        <i class="fas fa-plus"></i> Agregar Promoción Flash
+                    </button>
+                    <div id="flash-promos">
+                        <% config.flash_promos.forEach((promo, index) => { %>
+                            <div class="promo-content" id="flash-promo-<%= index %>">
+                                <div class="form-row">
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Texto en Negrita</label>
+                                            <input type="text" class="form-control" name="flash_promos[<%= index %>][boldText]" value="<%= promo.boldText %>" placeholder="Ej: Promo Flash" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Texto Normal</label>
+                                            <input type="text" class="form-control" name="flash_promos[<%= index %>][plainText]" value="<%= promo.plainText %>" placeholder="Ej: Hasta 50% OFF en rutas hacia Brasil" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Icono</label>
+                                            <input type="text" class="form-control" name="flash_promos[<%= index %>][icon]" value="<%= promo.icon %>" placeholder="Ej: <i class='fa-solid fa-bolt'></i>" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Efecto Glow</label>
+                                            <select class="form-control" name="flash_promos[<%= index %>][smartDaysGlow]">
+                                                <option value="on" <%= promo.smartDaysGlow === 'on' ? 'selected' : '' %>>On</option>
+                                                <option value="off" <%= promo.smartDaysGlow === 'off' ? 'selected' : '' %>>Off</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Fecha de Inicio</label>
+                                            <input type="datetime-local" class="form-control" name="flash_promos[<%= index %>][start_date]" value="<%= promo.start_date ? promo.start_date.toISOString ? promo.start_date.toISOString().slice(0, 16) : promo.start_date : '' %>" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Fecha de Fin</label>
+                                            <input type="datetime-local" class="form-control" name="flash_promos[<%= index %>][end_date]" value="<%= promo.end_date ? promo.end_date.toISOString ? promo.end_date.toISOString().slice(0, 16) : promo.end_date : '' %>" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label>Mostrar CTA</label>
+                                            <select class="form-control cta-toggle" name="flash_promos[<%= index %>][showCTA]" onchange="toggleCTAFields(this)">
+                                                <option value="on" <%= promo.showCTA === 'on' || promo.showCTA === true ? 'selected' : '' %>>On</option>
+                                                <option value="off" <%= promo.showCTA === 'off' || promo.showCTA === false ? 'selected' : '' %>>Off</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cta-fields" style="display: none">
+                                    <div class="form-row">
+                                        <div class="form-col">
+                                            <div class="form-group">
+                                                <label>Texto CTA</label>
+                                                <input type="text" class="form-control" name="flash_promos[<%= index %>][ctaText]" value="<%= promo.ctaText %>" placeholder="Ej: Aplicar promo">
+                                            </div>
+                                        </div>
+                                        <div class="form-col">
+                                            <div class="form-group">
+                                                <label>Link CTA</label>
+                                                <input type="text" class="form-control" name="flash_promos[<%= index %>][ctaLink]" value="<%= promo.ctaLink %>" placeholder="Ej: ?pc=BRASIL">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="promo-actions">
+                                    <button type="button" class="action-btn delete-btn" onclick="deleteEvent('flash', <%= index %>)">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </button>
+                                    <button type="button" class="action-btn clear-btn" onclick="clearEvent('flash', <%= index %>)">
+                                        <i class="fas fa-eraser"></i> Limpiar
+                                    </button>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleTab(tab, contentId) {
+            // Si el tab ya está activo, desactivarlo
+            if (tab.classList.contains('active')) {
+                tab.classList.remove('active');
+                const content = document.getElementById(contentId);
+                if (content) {
+                    content.classList.remove('active');
+                }
+                return;
+            }
+            // Desactivar todos los tabs del mismo grupo
+            const tabs = tab.parentElement.querySelectorAll('.promo-tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            // Activar el tab seleccionado
+            tab.classList.add('active');
+            // Ocultar todos los contenidos del mismo grupo
+            const groupId = tab.parentElement.id;
+            const contents = document.querySelectorAll(`#${groupId.replace('-tabs', '')} .promo-content`);
+            contents.forEach(c => c.classList.remove('active'));
+            // Mostrar el contenido seleccionado
+            const content = document.getElementById(contentId);
+            if (content) {
+                content.classList.add('active');
+                // Quitar scroll automático
+                // content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Solo inicializar visibilidad de campos CTA
+            document.querySelectorAll('.promo-content').forEach(function(content) {
+                const select = content.querySelector('select[name*="[showCTA]"]');
+                if (select) toggleCTAFields(select);
+            });
+        });
+
+        function toggleContent(header) {
+            const content = header.nextElementSibling;
+            content.classList.toggle('active');
+        }
+
+        function toggleCTAFields(select) {
+            const ctaFields = select.closest('.promo-content').querySelector('.cta-fields');
+            if (select.value === 'on') {
+                ctaFields.style.display = 'block';
+            } else {
+                ctaFields.style.display = 'none';
+            }
+        }
+
+        function addEvent(type) {
+            const container = document.getElementById(`${type}-${type === 'commercial' ? 'events' : 'promos'}`);
+            const index = container.children.length;
+            const now = new Date();
+            const endDate = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+
+            const eventHtml = `
+                <div class="promo-box" id="${type}-${type === 'commercial' ? 'event' : 'promo'}-${index}">
+                    <div class="promo-header" onclick="toggleContent(this)">
+                        <h5>
+                            <span class="emoji"><i class='fa-solid fa-${type === 'commercial' ? 'lightbulb-on' : 'bolt'}'></i></span>
+                            ${type === 'commercial' ? 'SMART Days' : 'Promo Flash'}
+                            <span class="badge bg-primary">${now.toLocaleDateString()} ${now.toLocaleTimeString()}</span>
+                        </h5>
+                    </div>
+                    <div class="promo-content active">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label>Texto en Negrita</label>
+                                    <input type="text" class="form-control" name="${type}_${type === 'commercial' ? 'events' : 'promos'}[${index}][boldText]" value="${type === 'commercial' ? 'SMART Days' : 'Promo Flash'}" placeholder="Ej: ${type === 'commercial' ? 'SMART Days' : 'Promo Flash'}" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label>Texto Normal</label>
+                                    <input type="text" class="form-control" name="${type}_${type === 'commercial' ? 'events' : 'promos'}[${index}][plainText]" value="¡Aprovecha antes que se acabe!" placeholder="Ej: ¡Aprovecha antes que se acabe!" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label>Icono</label>
+                                    <input type="text" class="form-control" name="${type}_${type === 'commercial' ? 'events' : 'promos'}[${index}][icon]" value="<i class='fa-solid fa-${type === 'commercial' ? 'lightbulb-on' : 'bolt'}'></i>" placeholder="Ej: <i class='fa-solid fa-${type === 'commercial' ? 'lightbulb-on' : 'bolt'}'></i>" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label>Efecto Glow</label>
+                                    <select class="form-control" name="${type}_${type === 'commercial' ? 'events' : 'promos'}[${index}][smartDaysGlow]">
+                                        <option value="on" selected>On</option>
+                                        <option value="off">Off</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label>Fecha de Inicio</label>
+                                    <input type="datetime-local" class="form-control" name="${type}_${type === 'commercial' ? 'events' : 'promos'}[${index}][start_date]" value="${now.toISOString().slice(0, 16)}" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label>Fecha de Fin</label>
+                                    <input type="datetime-local" class="form-control" name="${type}_${type === 'commercial' ? 'events' : 'promos'}[${index}][end_date]" value="${endDate.toISOString().slice(0, 16)}" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label>Mostrar CTA</label>
+                                    <select class="form-control cta-toggle" name="${type}_${type === 'commercial' ? 'events' : 'promos'}[${index}][showCTA]" onchange="toggleCTAFields(this)">
+                                        <option value="on">On</option>
+                                        <option value="off" selected>Off</option>
+                                    </select>
+                                </div>
+                            </div>
+                            ${type === 'flash' ? `
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label>Código Promocional</label>
+                                        <input type="text" class="form-control" name="${type}_promos[${index}][promocode]" value="FLASH${index + 1}" placeholder="Ej: FLASH50" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label>Descuento (%)</label>
+                                        <input type="text" class="form-control" name="${type}_promos[${index}][discount]" value="50" placeholder="Ej: 50" required>
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="cta-fields" style="display: none">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label>Texto CTA</label>
+                                        <input type="text" class="form-control" name="${type}_${type === 'commercial' ? 'events' : 'promos'}[${index}][ctaText]" placeholder="Ej: ${type === 'commercial' ? 'Ver ofertas' : 'Aplicar promo'}">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label>Link CTA</label>
+                                        <input type="text" class="form-control" name="${type}_${type === 'commercial' ? 'events' : 'promos'}[${index}][ctaLink]" placeholder="Ej: ${type === 'commercial' ? 'https://jetsmart.com/ofertas' : '?pc=FLASH'}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="promo-actions">
+                            <button type="button" class="action-btn delete-btn" onclick="deleteEvent('${type}', ${index})">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                            <button type="button" class="action-btn clear-btn" onclick="clearEvent('${type}', ${index})">
+                                <i class="fas fa-eraser"></i> Limpiar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', eventHtml);
+        }
+
+        function deleteEvent(type, index) {
+            if (confirm('¿Está seguro de que desea eliminar este evento?')) {
+                const element = document.getElementById(`${type}-${type === 'commercial' ? 'event' : 'promo'}-${index}`);
+                element.remove();
+            }
+        }
+
+        function clearEvent(type, index) {
+            if (confirm('¿Está seguro de que desea limpiar este evento?')) {
+                const element = document.getElementById(`${type}-${type === 'commercial' ? 'event' : 'promo'}-${index}`);
+                const inputs = element.querySelectorAll('input[type="text"], input[type="number"]');
+                inputs.forEach(input => {
+                    input.value = '';
+                });
+                const selects = element.querySelectorAll('select');
+                selects.forEach(select => {
+                    select.value = 'off';
+                    if (select.classList.contains('cta-toggle')) {
+                        toggleCTAFields(select);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html> 
