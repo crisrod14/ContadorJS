@@ -2,10 +2,10 @@
     "commercial_events": [
         {
             "boldText": "SMART Sale",
-            "plainText": "¡Aprovechá antes que se acabe!",
+            "plainText": "¡No te pierdas estas ofertas y armá tu viaje!",
             "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
             "smartDaysGlow": "on",
-            "start_date": "2025-05-11T00:00",
+            "start_date": "2025-05-12T00:00",
             "end_date": "2025-05-14T23:59:59",
             "showCTA": "off",
             "ctaText": "Ver ofertas",

@@ -2,12 +2,12 @@
     "commercial_events": [
         {
             "boldText": "SMART Days",
-            "plainText": "¡Aprovecha antes que se acabe!",
-            "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
-            "smartDaysGlow": "on",
-            "start_date": "2025-05-12T10:00",
-            "end_date": "2025-05-19T10:00",
-            "showCTA": "off"
+            "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
+            "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+            "start_date": "2025-05-12T00:00:00",
+            "end_date": "2025-05-14T23:59:59",
+            "showCTA": false,
+            "smartDaysGlow": true
         }
     ],
     "flash_promos": []

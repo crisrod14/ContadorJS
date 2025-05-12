@@ -13,10 +13,10 @@ var CountdownBannerInterval = setInterval(function () {
   "es-AR": [
     {
       "boldText": "SMART Sale",
-      "plainText": "¡Aprovechá antes que se acabe!",
+      "plainText": "¡No te pierdas estas ofertas y armá tu viaje!",
       "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
       "smartDaysGlow": true,
-      "start_date": "2025-05-11T00:00:00",
+      "start_date": "2025-05-12T00:00:00",
       "end_date": "2025-05-14T23:59:59",
       "showCTA": false,
       "type": "evento-comercial"
@@ -61,59 +61,69 @@ var CountdownBannerInterval = setInterval(function () {
   "es-CL": [
     {
       "boldText": "SMART Days",
-      "plainText": "¡Aprovecha antes que se acabe!",
-      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+      "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
+      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
       "smartDaysGlow": true,
-      "start_date": "2025-05-11T10:00:00",
-      "end_date": "2025-05-19T10:00:00",
+      "start_date": "2025-05-12T00:00:00",
+      "end_date": "2025-05-14T23:59:59",
       "showCTA": false,
       "type": "evento-comercial"
+    },
+    {
+      "boldText": "Promo Flash",
+      "plainText": "¡Aprovecha antes que se acabe!",
+      "icon": "<i class='fa-solid fa-bolt'></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-09T02:07:00",
+      "end_date": "2025-05-12T10:00:00",
+      "showCTA": false,
+      "type": "promo-flash"
     }
   ],
   "es-PE": [
     {
       "boldText": "SMART Days",
-      "plainText": "¡Aprovecha antes que se acabe!",
-      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-11T10:00:00",
-      "end_date": "2025-05-19T10:00:00",
+      "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
+      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+      "start_date": "2025-05-12T00:00:00",
+      "end_date": "2025-05-14T23:59:59",
       "showCTA": false,
+      "smartDaysGlow": true,
       "type": "evento-comercial"
     }
   ],
   "es-CO": [
     {
       "boldText": "SMART Days",
-      "plainText": "¡Aprovecha antes que se acabe!",
-      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-12T10:00:00",
-      "end_date": "2025-05-19T10:00:00",
+      "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
+      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+      "start_date": "2025-05-12T00:00:00",
+      "end_date": "2025-05-14T23:59:59",
       "showCTA": false,
+      "smartDaysGlow": true,
       "type": "evento-comercial"
     }
   ],
   "es-UY": [
     {
       "boldText": "SMART Days",
-      "plainText": "¡Aprovechá antes que se acabe!",
-      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-12T10:00:00",
-      "end_date": "2025-05-19T10:00:00",
+      "plainText": "¡No te pierdas estas ofertas y armá tu viaje!",
+      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+      "start_date": "2025-05-12T00:00:00",
+      "end_date": "2025-05-14T23:59:59",
       "showCTA": false,
+      "smartDaysGlow": true,
       "type": "evento-comercial"
     }
   ],
   "es-PY": [
     {
       "boldText": "SMART Days",
-      "plainText": "¡Aprovechá antes que se acabe!",
-      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+      "plainText": "¡No te pierdas estas ofertas y armá tu viaje!",
+      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
       "smartDaysGlow": true,
-      "start_date": "2025-05-11T10:00:00",
-      "end_date": "2025-05-19T10:00:00",
+      "start_date": "2025-05-12T00:00:00",
+      "end_date": "2025-05-14T23:59:59",
       "showCTA": false,
       "type": "evento-comercial"
     }
@@ -121,11 +131,11 @@ var CountdownBannerInterval = setInterval(function () {
   "es-EC": [
     {
       "boldText": "SMART Days",
-      "plainText": "¡Aprovecha antes que se acabe!",
-      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+      "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
+      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
       "smartDaysGlow": true,
-      "start_date": "2025-05-12T10:00:00",
-      "end_date": "2025-05-19T10:00:00",
+      "start_date": "2025-05-12T00:00:00",
+      "end_date": "2025-05-14T23:59:59",
       "showCTA": false,
       "type": "evento-comercial"
     }
@@ -133,24 +143,24 @@ var CountdownBannerInterval = setInterval(function () {
   "en-US": [
     {
       "boldText": "SMART Days",
-      "plainText": "Take advantage before it ends!",
-      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-11T10:00:00",
-      "end_date": "2025-05-19T10:00:00",
+      "plainText": "Don't miss these deals—plan your trip now!",
+      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+      "start_date": "2025-05-12T00:00:00",
+      "end_date": "2025-05-14T23:59:59",
       "showCTA": false,
+      "smartDaysGlow": true,
       "type": "evento-comercial"
     }
   ],
   "pt-BR": [
     {
       "boldText": "SMART Days",
-      "plainText": "Aproveite antes que acabe!",
-      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-11T10:00:00",
-      "end_date": "2025-05-19T10:00:00",
+      "plainText": "Não perca essas ofertas e monte sua viagem!",
+      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+      "start_date": "2025-05-12T00:00:00",
+      "end_date": "2025-05-14T23:59:59",
       "showCTA": false,
+      "smartDaysGlow": true,
       "type": "evento-comercial"
     }
   ]
