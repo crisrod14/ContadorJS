@@ -150,7 +150,7 @@ async function saveConfig(country, config) {
 
 async function updateCountdownScript(country, config) {
     const templatePath = path.join(__dirname, 'templates', 'countdown-template.js');
-    const scriptPath = path.join(__dirname, 'public', 'js', `countdown-${country}.js`);
+    const scriptPath = path.join(__dirname, 'public', 'js', 'countdown.js');
     
     try {
         let template = await fs.readFile(templatePath, 'utf8');
@@ -160,49 +160,24 @@ async function updateCountdownScript(country, config) {
             return Promise.all(events.map(event => processEventData(event, isCommercial)));
         };
 
-        const commercialEvents = await processEvents(config.commercial_events || [], true);
-        const flashPromos = await processEvents(config.flash_promos || [], false);
+        // Obtener todas las configuraciones de países
+        const allConfigs = {};
+        for (const countryCode of Object.keys(COUNTRIES)) {
+            const countryConfig = await readConfig(countryCode);
+            const commercialEvents = await processEvents(countryConfig.commercial_events || [], true);
+            const flashPromos = await processEvents(countryConfig.flash_promos || [], false);
+            allConfigs[COUNTRIES[countryCode].culture] = [...commercialEvents, ...flashPromos];
+        }
         
-        // Función para serializar objetos como JavaScript literal (array JS válido)
-        const serializeAsJS = (obj) => {
-            if (!obj || obj.length === 0) return '[]';
-            return '[\n' + obj.map(item => {
-                const entries = Object.entries(item).map(([key, value]) => {
-                    if (typeof value === 'string') {
-                        const escapedValue = value
-                            .replace(/\\/g, '\\\\')
-                            .replace(/'/g, "\\'")
-                            .replace(/\n/g, '\\n')
-                            .replace(/\r/g, '\\r')
-                            .replace(/\t/g, '\\t');
-                        return `${key}: '${escapedValue}'`;
-                    }
-                    if (typeof value === 'boolean' || typeof value === 'number') {
-                        return `${key}: ${value}`;
-                    }
-                    if (value === null) {
-                        return `${key}: null`;
-                    }
-                    if (typeof value === 'object') {
-                        return `${key}: ${JSON.stringify(value, null, 2).replace(/\n/g, '\n    ')}`;
-                    }
-                    return `${key}: ${JSON.stringify(value)}`;
-                });
-                return `  {${entries.join(', ')}}`;
-            }).join(',\n') + '\n]';
-        };
-        
-        // Reemplazar los placeholders con objetos JS serializados
-        template = template.replace('{{culture}}', COUNTRIES[country].culture);
-        template = template.replace('{{commercial_events}}', serializeAsJS(commercialEvents));
-        template = template.replace('{{flash_promos}}', serializeAsJS(flashPromos));
+        // Reemplazar el placeholder con la configuración completa
+        template = template.replace('{{countdown_config}}', JSON.stringify(allConfigs, null, 2));
         
         // Asegurarse de que el directorio existe
         await fs.mkdir(path.dirname(scriptPath), { recursive: true });
         
         // Escribir el archivo
         await fs.writeFile(scriptPath, template);
-        console.log(`Script generado para ${country} en ${scriptPath}`);
+        console.log(`Script unificado generado en ${scriptPath}`);
     } catch (error) {
         console.error('Error al generar el script:', error);
         throw error;
@@ -333,14 +308,9 @@ app.post('/country/:country/save', async (req, res) => {
 });
 
 // Nueva ruta para obtener el script generado
-app.get('/country/:country/script', async (req, res) => {
-    const { country } = req.params;
-    if (!COUNTRIES[country]) {
-        return res.status(400).send('País no válido');
-    }
-
+app.get('/script', async (req, res) => {
     try {
-        const scriptPath = path.join(__dirname, 'public', 'js', `countdown-${country}.js`);
+        const scriptPath = path.join(__dirname, 'public', 'js', 'countdown.js');
         const script = await fs.readFile(scriptPath, 'utf8');
         res.send(script);
     } catch (error) {

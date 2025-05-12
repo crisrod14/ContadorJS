@@ -9,7 +9,152 @@ var CountdownBannerInterval = setInterval(function () {
 
     // Obtener la configuración para el país actual
     const currentCulture = JetSmart.TealiumData.culture;
-    const COUNTDOWN_CONFIG = {{countdown_config}};
+    const COUNTDOWN_CONFIG = {
+  "es-AR": [
+    {
+      "boldText": "SMART Sale",
+      "plainText": "¡Aprovechá antes que se acabe!",
+      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-11T00:00:00",
+      "end_date": "2025-05-14T23:59:59",
+      "showCTA": false,
+      "type": "evento-comercial"
+    },
+    {
+      "boldText": "Promo Flash",
+      "plainText": "Hasta 50% OFF en rutas hacia Brasil",
+      "icon": "<i class=\"fa-solid fa-bolt\"></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-12T18:00:00",
+      "end_date": "2025-05-13T10:00:00",
+      "showCTA": true,
+      "ctaText": "Aplicar promo",
+      "ctaLink": "?pc=BRASIL",
+      "type": "promo-flash"
+    },
+    {
+      "boldText": "Promo Flash",
+      "plainText": "Hasta 75% OFF en rutas hacia Córdoba, Mendoza y Resistencia",
+      "icon": "<i class=\"fa-solid fa-bolt\"></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-13T11:00:00",
+      "end_date": "2025-05-13T19:00:00",
+      "showCTA": true,
+      "ctaText": "Aplicar promo",
+      "ctaLink": "?pc=WOW",
+      "type": "promo-flash"
+    },
+    {
+      "boldText": "Promo Flash",
+      "plainText": "Hasta 50% OFF en rutas hacia Chile",
+      "icon": "<i class=\"fa-solid fa-bolt\"></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-14T18:00:00",
+      "end_date": "2025-05-15T10:00:00",
+      "showCTA": true,
+      "ctaText": "Aplicar promo",
+      "ctaLink": "?pc=CHILE",
+      "type": "promo-flash"
+    }
+  ],
+  "es-CL": [
+    {
+      "boldText": "SMART Days",
+      "plainText": "¡Aprovecha antes que se acabe!",
+      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-11T10:00:00",
+      "end_date": "2025-05-19T10:00:00",
+      "showCTA": false,
+      "type": "evento-comercial"
+    }
+  ],
+  "es-PE": [
+    {
+      "boldText": "SMART Days",
+      "plainText": "¡Aprovecha antes que se acabe!",
+      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-11T10:00:00",
+      "end_date": "2025-05-19T10:00:00",
+      "showCTA": false,
+      "type": "evento-comercial"
+    }
+  ],
+  "es-CO": [
+    {
+      "boldText": "SMART Days",
+      "plainText": "¡Aprovecha antes que se acabe!",
+      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-12T10:00:00",
+      "end_date": "2025-05-19T10:00:00",
+      "showCTA": false,
+      "type": "evento-comercial"
+    }
+  ],
+  "es-UY": [
+    {
+      "boldText": "SMART Days",
+      "plainText": "¡Aprovechá antes que se acabe!",
+      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-12T10:00:00",
+      "end_date": "2025-05-19T10:00:00",
+      "showCTA": false,
+      "type": "evento-comercial"
+    }
+  ],
+  "es-PY": [
+    {
+      "boldText": "SMART Days",
+      "plainText": "¡Aprovechá antes que se acabe!",
+      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-11T10:00:00",
+      "end_date": "2025-05-19T10:00:00",
+      "showCTA": false,
+      "type": "evento-comercial"
+    }
+  ],
+  "es-EC": [
+    {
+      "boldText": "SMART Days",
+      "plainText": "¡Aprovecha antes que se acabe!",
+      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-12T10:00:00",
+      "end_date": "2025-05-19T10:00:00",
+      "showCTA": false,
+      "type": "evento-comercial"
+    }
+  ],
+  "en-US": [
+    {
+      "boldText": "SMART Days",
+      "plainText": "Take advantage before it ends!",
+      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-11T10:00:00",
+      "end_date": "2025-05-19T10:00:00",
+      "showCTA": false,
+      "type": "evento-comercial"
+    }
+  ],
+  "pt-BR": [
+    {
+      "boldText": "SMART Days",
+      "plainText": "Aproveite antes que acabe!",
+      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+      "smartDaysGlow": true,
+      "start_date": "2025-05-11T10:00:00",
+      "end_date": "2025-05-19T10:00:00",
+      "showCTA": false,
+      "type": "evento-comercial"
+    }
+  ]
+};
     const COUNTDOWN_RANGES = COUNTDOWN_CONFIG[currentCulture] || [];
 
     // Si no hay eventos para este país, no mostrar nada
