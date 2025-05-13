@@ -1,187 +1,178 @@
 var CountdownBannerInterval = setInterval(function () {
-    if (typeof JetSmart === "undefined" || !document.querySelector('bb-searchbox')) return;
-    clearInterval(CountdownBannerInterval);
+  if (typeof JetSmart === "undefined" || !document.querySelector('bb-searchbox')) return;
+  clearInterval(CountdownBannerInterval);
 
-    // =================== CONFIGURACIÓN ===================
-    // SVG del avión (pattern)
-    const planeSVG = `<svg width="51" height="49" viewBox="0 0 51 49" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M35.8278 14.8679C37.9065 13.8986 42.4016 13.9611 43.3994 16.1009C44.4258 18.3019 41.5557 21.7243 39.477 22.6936L32.3238 26.0292L31.2276 39.6405C31.1459 40.4229 30.6444 41.1033 29.9719 41.4169L26.5482 43.0134C25.8756 43.327 25.1015 42.9437 24.9998 42.2468L23.092 30.3341L16.8559 33.242L15.8193 38.0425C15.7499 38.3725 15.5624 38.6089 15.2567 38.7514L12.6889 39.9488C12.1998 40.1769 11.6619 39.9811 11.4338 39.492C11.4053 39.4308 11.3768 39.3697 11.3483 39.3086L10.1402 31.6099L5.04776 25.797C5.01925 25.7359 4.99074 25.6747 4.93372 25.5525C4.73416 25.1245 4.90142 24.5255 5.39053 24.2974L7.95834 23.1C8.26403 22.9575 8.59411 23.0268 8.89156 23.1859L13.2067 25.4163L19.4428 22.5084L11.5719 13.4507C11.1034 12.9248 11.2789 12.0243 11.9514 11.7106L15.3752 10.1141C16.0477 9.80053 16.9198 9.9149 17.5717 10.3552L28.6747 18.2035L35.8278 14.8679Z" fill="#B5373E"/></svg>`;
-    const patternDataUrl = `data:image/svg+xml;base64,${btoa(planeSVG)}`;
+  // =================== CONFIGURACIÓN ===================
+  // SVG del avión (pattern)
+  const planeSVG = `<svg width="51" height="49" viewBox="0 0 51 49" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M35.8278 14.8679C37.9065 13.8986 42.4016 13.9611 43.3994 16.1009C44.4258 18.3019 41.5557 21.7243 39.477 22.6936L32.3238 26.0292L31.2276 39.6405C31.1459 40.4229 30.6444 41.1033 29.9719 41.4169L26.5482 43.0134C25.8756 43.327 25.1015 42.9437 24.9998 42.2468L23.092 30.3341L16.8559 33.242L15.8193 38.0425C15.7499 38.3725 15.5624 38.6089 15.2567 38.7514L12.6889 39.9488C12.1998 40.1769 11.6619 39.9811 11.4338 39.492C11.4053 39.4308 11.3768 39.3697 11.3483 39.3086L10.1402 31.6099L5.04776 25.797C5.01925 25.7359 4.99074 25.6747 4.93372 25.5525C4.73416 25.1245 4.90142 24.5255 5.39053 24.2974L7.95834 23.1C8.26403 22.9575 8.59411 23.0268 8.89156 23.1859L13.2067 25.4163L19.4428 22.5084L11.5719 13.4507C11.1034 12.9248 11.2789 12.0243 11.9514 11.7106L15.3752 10.1141C16.0477 9.80053 16.9198 9.9149 17.5717 10.3552L28.6747 18.2035L35.8278 14.8679Z" fill="#B5373E"/></svg>`;
+  const patternDataUrl = `data:image/svg+xml;base64,${btoa(planeSVG)}`;
 
-    // Obtener la configuración para el país actual
-    const currentCulture = JetSmart.TealiumData.culture;
-    const COUNTDOWN_CONFIG = {
-  "es-AR": [
-    {
-      "boldText": "SMART Sale",
-      "plainText": "¡No te pierdas estas ofertas y armá tu viaje!",
-      "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-12T00:00:00",
-      "end_date": "2025-05-14T23:59:59",
-      "showCTA": false,
-      "type": "evento-comercial"
-    },
-    {
-      "boldText": "Promo Flash",
-      "plainText": "Hasta 50% OFF en rutas hacia Brasil",
-      "icon": "<i class=\"fa-solid fa-bolt\"></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-12T18:00:00",
-      "end_date": "2025-05-13T10:00:00",
-      "showCTA": true,
-      "ctaText": "Aplicar promo",
-      "ctaLink": "?pc=BRASIL",
-      "type": "promo-flash"
-    },
-    {
-      "boldText": "Promo Flash",
-      "plainText": "Hasta 75% OFF en rutas hacia Córdoba, Mendoza y Resistencia",
-      "icon": "<i class=\"fa-solid fa-bolt\"></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-13T11:00:00",
-      "end_date": "2025-05-13T19:00:00",
-      "showCTA": true,
-      "ctaText": "Aplicar promo",
-      "ctaLink": "?pc=WOW",
-      "type": "promo-flash"
-    },
-    {
-      "boldText": "Promo Flash",
-      "plainText": "Hasta 50% OFF en rutas hacia Chile",
-      "icon": "<i class=\"fa-solid fa-bolt\"></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-14T18:00:00",
-      "end_date": "2025-05-15T10:00:00",
-      "showCTA": true,
-      "ctaText": "Aplicar promo",
-      "ctaLink": "?pc=CHILE",
-      "type": "promo-flash"
-    }
-  ],
-  "es-CL": [
-    {
-      "boldText": "SMART Days",
-      "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
-      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-12T00:00:00",
-      "end_date": "2025-05-14T23:59:59",
-      "showCTA": false,
-      "type": "evento-comercial"
-    },
-    {
-      "boldText": "Promo Flash",
-      "plainText": "¡Aprovecha antes que se acabe!",
-      "icon": "<i class='fa-solid fa-bolt'></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-09T02:07:00",
-      "end_date": "2025-05-12T10:00:00",
-      "showCTA": false,
-      "type": "promo-flash"
-    }
-  ],
-  "es-PE": [
-    {
-      "boldText": "SMART Days",
-      "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
-      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
-      "start_date": "2025-05-12T00:00:00",
-      "end_date": "2025-05-14T23:59:59",
-      "showCTA": false,
-      "smartDaysGlow": true,
-      "type": "evento-comercial"
-    }
-  ],
-  "es-CO": [
-    {
-      "boldText": "SMART Days",
-      "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
-      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
-      "start_date": "2025-05-12T00:00:00",
-      "end_date": "2025-05-14T23:59:59",
-      "showCTA": false,
-      "smartDaysGlow": true,
-      "type": "evento-comercial"
-    }
-  ],
-  "es-UY": [
-    {
-      "boldText": "SMART Days",
-      "plainText": "¡No te pierdas estas ofertas y armá tu viaje!",
-      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
-      "start_date": "2025-05-12T00:00:00",
-      "end_date": "2025-05-14T23:59:59",
-      "showCTA": false,
-      "smartDaysGlow": true,
-      "type": "evento-comercial"
-    }
-  ],
-  "es-PY": [
-    {
-      "boldText": "SMART Days",
-      "plainText": "¡No te pierdas estas ofertas y armá tu viaje!",
-      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-12T00:00:00",
-      "end_date": "2025-05-14T23:59:59",
-      "showCTA": false,
-      "type": "evento-comercial"
-    }
-  ],
-  "es-EC": [
-    {
-      "boldText": "SMART Days",
-      "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
-      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
-      "smartDaysGlow": true,
-      "start_date": "2025-05-12T00:00:00",
-      "end_date": "2025-05-14T23:59:59",
-      "showCTA": false,
-      "type": "evento-comercial"
-    }
-  ],
-  "en-US": [
-    {
-      "boldText": "SMART Days",
-      "plainText": "Don't miss these deals—plan your trip now!",
-      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
-      "start_date": "2025-05-12T00:00:00",
-      "end_date": "2025-05-14T23:59:59",
-      "showCTA": false,
-      "smartDaysGlow": true,
-      "type": "evento-comercial"
-    }
-  ],
-  "pt-BR": [
-    {
-      "boldText": "SMART Days",
-      "plainText": "Não perca essas ofertas e monte sua viagem!",
-      "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
-      "start_date": "2025-05-12T00:00:00",
-      "end_date": "2025-05-14T23:59:59",
-      "showCTA": false,
-      "smartDaysGlow": true,
-      "type": "evento-comercial"
-    }
-  ]
+  // Obtener la configuración para el país actual
+  const currentCulture = JetSmart.TealiumData.culture;
+  const COUNTDOWN_CONFIG = {
+"es-AR": [
+  {
+    "boldText": "SMART Sale",
+    "plainText": "¡No te pierdas estas ofertas y armá tu viaje!",
+    "icon": "<i class=\"fa-solid fa-lightbulb-on\"></i>",
+    "smartDaysGlow": true,
+    "start_date": "2025-05-11T23:00:00",
+    "end_date": "2025-05-14T23:59:59",
+    "showCTA": false,
+    "type": "evento-comercial"
+  },
+  {
+    "boldText": "Promo Flash",
+    "plainText": "Hasta 50% OFF en rutas hacia Brasil",
+    "icon": "<i class=\"fa-solid fa-bolt\"></i>",
+    "smartDaysGlow": true,
+    "start_date": "2025-05-12T18:00:00",
+    "end_date": "2025-05-13T10:00:00",
+    "showCTA": true,
+    "ctaText": "Aplicar promo",
+    "ctaLink": "?pc=BRASIL",
+    "type": "promo-flash"
+  },
+  {
+    "boldText": "Promo Flash",
+    "plainText": "Hasta 75% OFF en rutas hacia Córdoba, Mendoza y Resistencia",
+    "icon": "<i class=\"fa-solid fa-bolt\"></i>",
+    "smartDaysGlow": true,
+    "start_date": "2025-05-13T11:00:00",
+    "end_date": "2025-05-13T19:00:00",
+    "showCTA": true,
+    "ctaText": "Aplicar promo",
+    "ctaLink": "?pc=WOW",
+    "type": "promo-flash"
+  },
+  {
+    "boldText": "Promo Flash",
+    "plainText": "Hasta 50% OFF en rutas hacia Chile",
+    "icon": "<i class=\"fa-solid fa-bolt\"></i>",
+    "smartDaysGlow": true,
+    "start_date": "2025-05-14T18:00:00",
+    "end_date": "2025-05-15T10:00:00",
+    "showCTA": true,
+    "ctaText": "Aplicar promo",
+    "ctaLink": "?pc=CHILE",
+    "type": "promo-flash"
+  }
+],
+"es-CL": [
+  {
+    "boldText": "SMART Days",
+    "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
+    "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+    "smartDaysGlow": true,
+    "start_date": "2025-05-12T10:00:00",
+    "end_date": "2025-05-19T10:00:00",
+    "showCTA": false,
+    "type": "evento-comercial"
+  },
+  // otros eventos no modificados
+],
+"es-PE": [
+  {
+    "boldText": "SMART Days",
+    "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
+    "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+    "start_date": "2025-05-12T10:00:00",
+    "end_date": "2025-05-19T10:00:00",
+    "showCTA": false,
+    "smartDaysGlow": true,
+    "type": "evento-comercial"
+  }
+],
+"es-CO": [
+  {
+    "boldText": "SMART Days",
+    "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
+    "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+    "start_date": "2025-05-12T10:00:00",
+    "end_date": "2025-05-19T10:00:00",
+    "showCTA": false,
+    "smartDaysGlow": true,
+    "type": "evento-comercial"
+  }
+],
+"es-UY": [
+  {
+    "boldText": "SMART Days",
+    "plainText": "¡No te pierdas estas ofertas y armá tu viaje!",
+    "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+    "start_date": "2025-05-12T10:00:00",
+    "end_date": "2025-05-19T10:00:00",
+    "showCTA": false,
+    "smartDaysGlow": true,
+    "type": "evento-comercial"
+  }
+],
+"es-PY": [
+  {
+    "boldText": "SMART Days",
+    "plainText": "¡No te pierdas estas ofertas y armá tu viaje!",
+    "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+    "smartDaysGlow": true,
+    "start_date": "2025-05-12T10:00:00",
+    "end_date": "2025-05-19T10:00:00",
+    "showCTA": false,
+    "type": "evento-comercial"
+  }
+],
+"es-EC": [
+  {
+    "boldText": "SMART Days",
+    "plainText": "¡No dejes pasar las ofertas y arma tu viaje!",
+    "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+    "smartDaysGlow": true,
+    "start_date": "2025-05-12T10:00:00",
+    "end_date": "2025-05-19T10:00:00",
+    "showCTA": false,
+    "type": "evento-comercial"
+  }
+],
+"en-US": [
+  {
+    "boldText": "SMART Days",
+    "plainText": "Don't miss these deals—plan your trip now!",
+    "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+    "start_date": "2025-05-12T10:00:00",
+    "end_date": "2025-05-19T10:00:00",
+    "showCTA": false,
+    "smartDaysGlow": true,
+    "type": "evento-comercial"
+  }
+],
+"pt-BR": [
+  {
+    "boldText": "SMART Days",
+    "plainText": "Não perca essas ofertas e monte sua viagem!",
+    "icon": "<i class='fa-solid fa-lightbulb-on'></i>",
+    "start_date": "2025-05-12T10:00:00",
+    "end_date": "2025-05-19T10:00:00",
+    "showCTA": false,
+    "smartDaysGlow": true,
+    "type": "evento-comercial"
+  }
+]
 };
-    const COUNTDOWN_RANGES = COUNTDOWN_CONFIG[currentCulture] || [];
+  const COUNTDOWN_RANGES = COUNTDOWN_CONFIG[currentCulture] || [];
 
-    // Si no hay eventos para este país, no mostrar nada
-    if (COUNTDOWN_RANGES.length === 0) return;
+  // Si no hay eventos para este país, no mostrar nada
+  if (COUNTDOWN_RANGES.length === 0) return;
 
-    // =================== ESTILOS ===================
-    var userCss = `@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;700;800&family=Lato:wght@400;600&display=swap');
+  // =================== ESTILOS ===================
+  var userCss = `@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;700;800&family=Lato:wght@400;600&display=swap');
 
 @keyframes glow {
 0% {
-  text-shadow: 0 0 2px #00AEC7, 0 0 4px #00AEC7;
+text-shadow: 0 0 2px #00AEC7, 0 0 4px #00AEC7;
 }
 50% {
-  text-shadow: 0 0 8px #00AEC7, 0 0 16px #00AEC7;
+text-shadow: 0 0 8px #00AEC7, 0 0 16px #00AEC7;
 }
 100% {
-  text-shadow: 0 0 2px #00AEC7, 0 0 4px #00AEC7;
+text-shadow: 0 0 2px #00AEC7, 0 0 4px #00AEC7;
 }
 }
 
@@ -321,126 +312,126 @@ font-weight: 600;
 
 @media (max-width: 991px) {
 .smart-banner {
-  padding: 20px 64px;
+padding: 20px 64px;
 }
 }
 
 @media (max-width: 640px) {
 .smart-banner {
-  padding: 8px 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: auto;
-  flex-grow: 0;
-  gap: 7px;
-  justify-content: center;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+padding: 8px 24px;
+display: flex;
+flex-direction: column;
+align-items: center;
+height: auto;
+flex-grow: 0;
+gap: 7px;
+justify-content: center;
+width: 100vw;
+margin-left: calc(50% - 50vw);
 }
 
 .banner-header {
-  gap: 10px;
-  flex-grow: 0;
-  width: auto;
-  align-self: stretch;
-  justify-content: center;
-  display: flex;
-  flex-direction: row;
+gap: 10px;
+flex-grow: 0;
+width: auto;
+align-self: stretch;
+justify-content: center;
+display: flex;
+flex-direction: row;
 }
 
 .banner-title {
-  font-size: 18px;
-  text-align: center;
+font-size: 18px;
+text-align: center;
 }
 
 .banner-crown {
-  font-size: 19px;
-  text-align: center;
-  letter-spacing: -0.5px;
+font-size: 19px;
+text-align: center;
+letter-spacing: -0.5px;
 }
 
 .banner-subtitle {
-  font-size: 12px;
-  font-family: 'Encode Sans', sans-serif;
-  text-align: center;
+font-size: 12px;
+font-family: 'Encode Sans', sans-serif;
+text-align: center;
 }
 
 .countdown-container {
-  gap: 6px;
-  width: auto;
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+gap: 6px;
+width: auto;
+align-self: center;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+position: relative;
 }
 
 .offers-button {
-  flex-grow: 0;
-  width: auto;
-  align-self: center;
-  justify-content: center;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  display: flex;
-  flex-direction: row;
-  gap: 6px;
-  margin-left: 6px;
-  height: 28px;
-  font-size: 11px;
+flex-grow: 0;
+width: auto;
+align-self: center;
+justify-content: center;
+padding-top: 2px;
+padding-bottom: 2px;
+display: flex;
+flex-direction: row;
+gap: 6px;
+margin-left: 6px;
+height: 28px;
+font-size: 11px;
 }
 
 .button-text {
-  font-size: 11px;
-  margin-bottom: auto;
-  margin-top: auto;
-  flex-grow: 0;
-  height: auto;
-  align-self: stretch;
-  width: 55.3px;
+font-size: 11px;
+margin-bottom: auto;
+margin-top: auto;
+flex-grow: 0;
+height: auto;
+align-self: stretch;
+width: 55.3px;
 }
 
 .button-arrow {
-  font-size: 11px;
+font-size: 11px;
 }
 }
 
 @keyframes banner-slide-pass {
 0% {
-  transform: translateX(-100%);
-  opacity: 0.2;
+transform: translateX(-100%);
+opacity: 0.2;
 }
 60% {
-  transform: translateX(calc(100vw - 100% - 48px));
-  opacity: 1;
+transform: translateX(calc(100vw - 100% - 48px));
+opacity: 1;
 }
 70% {
-  transform: translateX(calc(100vw - 100% - 48px));
-  opacity: 1;
+transform: translateX(calc(100vw - 100% - 48px));
+opacity: 1;
 }
 100% {
-  transform: translateX(0);
-  opacity: 1;
+transform: translateX(0);
+opacity: 1;
 }
 }
 
 @keyframes pop-in {
 0% {
-  transform: scale(0.3);
-  opacity: 0;
+transform: scale(0.3);
+opacity: 0;
 }
 60% {
-  transform: scale(1.15);
-  opacity: 1;
+transform: scale(1.15);
+opacity: 1;
 }
 80% {
-  transform: scale(0.95);
+transform: scale(0.95);
 }
 100% {
-  transform: scale(1);
-  opacity: 1;
+transform: scale(1);
+opacity: 1;
 }
 }
 .banner-content-pop {
@@ -451,10 +442,10 @@ pointer-events: auto;
 
 @keyframes fade-in {
 0% {
-  opacity: 0;
+opacity: 0;
 }
 100% {
-  opacity: 1;
+opacity: 1;
 }
 }
 .banner-button-fade {
@@ -463,119 +454,131 @@ opacity: 1 !important;
 pointer-events: auto;
 }`;
 
-    // Inyectar CSS del usuario
-    var style = document.createElement('style');
-    style.textContent = userCss;
-    document.head.appendChild(style);
+  // Inyectar CSS del usuario
+  var style = document.createElement('style');
+  style.textContent = userCss;
+  document.head.appendChild(style);
 
-    // Inyectar FontAwesome (para el icono)
-    var faLink = document.createElement('link');
-    faLink.rel = 'stylesheet';
-    faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css';
-    document.head.appendChild(faLink);
+  // Inyectar FontAwesome (para el icono)
+  var faLink = document.createElement('link');
+  faLink.rel = 'stylesheet';
+  faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css';
+  document.head.appendChild(faLink);
 
-    // =================== CREAR HTML DEL BANNER ===================
-    var banner = document.createElement('div');
-    banner.className = 'smart-banner';
-    banner.style.backgroundImage = `url('${patternDataUrl}')`;
-    banner.style.backgroundRepeat = 'repeat';
-    banner.style.backgroundColor = '#af272f';
-    banner.style.backgroundSize = '32px 30px';
-    banner.style.backgroundPosition = 'center';
-    banner.style.position = 'relative';
-    banner.style.overflow = 'hidden';
+  // =================== CREAR HTML DEL BANNER ===================
+  var banner = document.createElement('div');
+  banner.className = 'smart-banner';
+  banner.style.backgroundImage = `url('${patternDataUrl}')`;
+  banner.style.backgroundRepeat = 'repeat';
+  banner.style.backgroundColor = '#af272f';
+  banner.style.backgroundSize = '32px 30px';
+  banner.style.backgroundPosition = 'center';
+  banner.style.position = 'relative';
+  banner.style.overflow = 'hidden';
 
-    // Encontrar el rango activo
-    const now = new Date();
-    const activeRange = COUNTDOWN_RANGES.find(range => {
-        const start = new Date(range.start_date);
-        const end = new Date(range.end_date);
-        return now >= start && now <= end;
-    });
+  // Encontrar el rango activo
+  const now = new Date();
+  
+  // Primero buscar promos flash activas
+  const activePromoFlash = COUNTDOWN_RANGES.find(range => {
+      const start = new Date(range.start_date);
+      const end = new Date(range.end_date);
+      return now >= start && now <= end && range.type === 'promo-flash';
+  });
 
-    // Si no hay rango activo, no mostrar nada
-    if (!activeRange) return;
+  // Si no hay promo flash activa, buscar evento comercial
+  const activeEventoComercial = !activePromoFlash ? COUNTDOWN_RANGES.find(range => {
+      const start = new Date(range.start_date);
+      const end = new Date(range.end_date);
+      return now >= start && now <= end && range.type === 'evento-comercial';
+  }) : null;
 
-    banner.innerHTML = `
-        <div class="banner-header">
-            <span class="banner-title${activeRange.smartDaysBorderGlow ? ' smartdays-border-glow' : ''}${activeRange.smartDaysGlow ? ' smartdays-glow' : ''}">${activeRange.boldText}</span>
-            <span class="banner-crown${activeRange.smartDaysBorderGlow ? ' smartdays-border-glow' : ''}${activeRange.smartDaysGlow ? ' smartdays-glow' : ''}">${activeRange.icon}</span>
-            <span class="banner-subtitle">${activeRange.plainText}</span>
-        </div>
-        <div class="countdown-container">
-            <div class="countdown-box"><span class="countdown-number" id="sdays">00</span><span class="countdown-label">Días</span></div>
-            <span class="countdown-separator">:</span>
-            <div class="countdown-box"><span class="countdown-number" id="shours">00</span><span class="countdown-label">Hr</span></div>
-            <span class="countdown-separator">:</span>
-            <div class="countdown-box"><span class="countdown-number" id="smins">00</span><span class="countdown-label">Min</span></div>
-            <span class="countdown-separator">:</span>
-            <div class="countdown-box"><span class="countdown-number" id="ssecs">00</span><span class="countdown-label">Seg</span></div>
-            ${activeRange.showCTA ? `<a class="offers-button" href="${activeRange.ctaLink}" target="_blank" rel="noopener">
-                <span class="button-text">${activeRange.ctaText}</span>
-            </a>` : ''}
-        </div>
-    `;
+  // Usar la promo flash si está activa, sino usar el evento comercial
+  const activeRange = activePromoFlash || activeEventoComercial;
 
-    // Insertar antes de #carousel o al inicio del body
-    var ref = document.getElementById('rt-carousel');
-    if (ref) {
-        ref.parentNode.insertBefore(banner, ref);
-    } else {
-        document.body.insertBefore(banner, document.body.firstChild);
-    }
+  // Si no hay rango activo, no mostrar nada
+  if (!activeRange) return;
 
-    // =================== COUNTDOWN ===================
-    function updateCountdown() {
-        var now = new Date();
-        var end = new Date(activeRange.end_date);
-        var diff = end - now;
-        if (diff < 0) diff = 0;
-        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        var mins = Math.floor((diff / (1000 * 60)) % 60);
-        var secs = Math.floor((diff / 1000) % 60);
-        document.getElementById('sdays').textContent = days.toString().padStart(2, '0');
-        document.getElementById('shours').textContent = hours.toString().padStart(2, '0');
-        document.getElementById('smins').textContent = mins.toString().padStart(2, '0');
-        document.getElementById('ssecs').textContent = secs.toString().padStart(2, '0');
-    }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+  banner.innerHTML = `
+      <div class="banner-header">
+          <span class="banner-title${activeRange.smartDaysBorderGlow ? ' smartdays-border-glow' : ''}${activeRange.smartDaysGlow ? ' smartdays-glow' : ''}">${activeRange.boldText}</span>
+          <span class="banner-crown${activeRange.smartDaysBorderGlow ? ' smartdays-border-glow' : ''}${activeRange.smartDaysGlow ? ' smartdays-glow' : ''}">${activeRange.icon}</span>
+          <span class="banner-subtitle">${activeRange.plainText}</span>
+      </div>
+      <div class="countdown-container">
+          <div class="countdown-box"><span class="countdown-number" id="sdays">00</span><span class="countdown-label">Días</span></div>
+          <span class="countdown-separator">:</span>
+          <div class="countdown-box"><span class="countdown-number" id="shours">00</span><span class="countdown-label">Hr</span></div>
+          <span class="countdown-separator">:</span>
+          <div class="countdown-box"><span class="countdown-number" id="smins">00</span><span class="countdown-label">Min</span></div>
+          <span class="countdown-separator">:</span>
+          <div class="countdown-box"><span class="countdown-number" id="ssecs">00</span><span class="countdown-label">Seg</span></div>
+          ${activeRange.showCTA ? `<a class="offers-button" href="${activeRange.ctaLink}" target="_blank" rel="noopener">
+              <span class="button-text">${activeRange.ctaText}</span>
+          </a>` : ''}
+      </div>
+  `;
 
-    // =================== ANIMACIÓN GLOW INTERMITENTE ===================
-    // Solo si smartDaysGlow está en true
-    if (activeRange.smartDaysGlow) {
-        const header = banner.querySelector('.banner-title');
-        const crown = banner.querySelector('.banner-crown');
-        function toggleGlow(on) {
-            if (on) {
-                header.classList.add('smartdays-glow');
-                crown.classList.add('smartdays-glow');
-            } else {
-                header.classList.remove('smartdays-glow');
-                crown.classList.remove('smartdays-glow');
-            }
-        }
-        // Ciclo: cada 8s, activa 4s, luego desactiva 4s
-        toggleGlow(false);
-        setInterval(() => {
-            toggleGlow(true);
-            setTimeout(() => toggleGlow(false), 4000);
-        }, 8000);
-    }
+  // Insertar antes de #carousel o al inicio del body
+  var ref = document.getElementById('rt-carousel');
+  if (ref) {
+      ref.parentNode.insertBefore(banner, ref);
+  } else {
+      document.body.insertBefore(banner, document.body.firstChild);
+  }
 
-    // Después de insertar el banner en el DOM, agrega este código JS para animaciones secuenciales
-    setTimeout(() => {
-        const countdown = banner.querySelector('.countdown-container');
-        const offersButton = banner.querySelector('.offers-button');
-        if (countdown) {
-            countdown.classList.add('banner-content-pop');
-        }
-        if (offersButton) {
-            setTimeout(() => {
-                offersButton.classList.add('banner-button-fade');
-            }, 2000);
-        }
-    }, 2200);
+  // =================== COUNTDOWN ===================
+  function updateCountdown() {
+      var now = new Date();
+      var end = new Date(activeRange.end_date);
+      var diff = end - now;
+      if (diff < 0) diff = 0;
+      var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      var mins = Math.floor((diff / (1000 * 60)) % 60);
+      var secs = Math.floor((diff / 1000) % 60);
+      document.getElementById('sdays').textContent = days.toString().padStart(2, '0');
+      document.getElementById('shours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('smins').textContent = mins.toString().padStart(2, '0');
+      document.getElementById('ssecs').textContent = secs.toString().padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // =================== ANIMACIÓN GLOW INTERMITENTE ===================
+  // Solo si smartDaysGlow está en true
+  if (activeRange.smartDaysGlow) {
+      const header = banner.querySelector('.banner-title');
+      const crown = banner.querySelector('.banner-crown');
+      function toggleGlow(on) {
+          if (on) {
+              header.classList.add('smartdays-glow');
+              crown.classList.add('smartdays-glow');
+          } else {
+              header.classList.remove('smartdays-glow');
+              crown.classList.remove('smartdays-glow');
+          }
+      }
+      // Ciclo: cada 8s, activa 4s, luego desactiva 4s
+      toggleGlow(false);
+      setInterval(() => {
+          toggleGlow(true);
+          setTimeout(() => toggleGlow(false), 4000);
+      }, 8000);
+  }
+
+  // Después de insertar el banner en el DOM, agrega este código JS para animaciones secuenciales
+  setTimeout(() => {
+      const countdown = banner.querySelector('.countdown-container');
+      const offersButton = banner.querySelector('.offers-button');
+      if (countdown) {
+          countdown.classList.add('banner-content-pop');
+      }
+      if (offersButton) {
+          setTimeout(() => {
+              offersButton.classList.add('banner-button-fade');
+          }, 2000);
+      }
+  }, 2200);
 
 }, 800); 
